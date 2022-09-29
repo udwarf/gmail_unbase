@@ -69,13 +69,13 @@
         for (node of nodes) {
             let txt = node.innerHTML; //textContent
             txt = txt.replaceAll('<wbr>','');
-            let text_blocks = [...txt.matchAll(/[0-9A-Za-z\+]{10,}/g)];
+            let text_blocks = [...txt.matchAll(/[0-9A-Za-z\+]{10,}=*/g)];
             text_blocks.forEach(
                 (text_block) => {
                     console.log(text_block);
                     try {
                         let decoded = atob(text_block[0]);
-                        if (decoded.match(/rror|http|request|not|for|www/i)) {
+                        if (decoded.match(/rror|http|request|not|for|www|file/i)) {
                             decoded = decoded.replaceAll('\n','<br>');
                             node.innerHTML = txt.replaceAll(text_block[0], '<i style="color:#00a700">'+decoded+'</i>');
                             txt = node.innerHTML;
